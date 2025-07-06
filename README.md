@@ -29,3 +29,24 @@ using (HttpClient client = new())
 > 1. A palavra reservada `using` neste caso é algo parecido como o with do Python: ela cria um contexto onde um objeto será usado e descartado em seguida. Neste caso, o objeto que será criado e descartado é o `HttpClient` de nome `client`.
 >
 > 2. Note que, como a requisição HTTP é obtida por um método assíncrono (`GetStringAsync`), precisamos fazer com que o programa aguarde a conclusão do método assíncrono por meio da palavra reservada `await`.
+
+## Try Catch
+Implementação do try/catch no programa principal:
+
+```CSharp
+// Program.cs
+using (HttpClient client = new())
+{
+    try
+    {
+        string resposta = await client.GetStringAsync(
+            "https://guilhermeonrails.github.io/api-csharp-songs/songs.json"
+        );
+        Console.WriteLine(resposta);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Temos um problema: {ex.Message}");
+    }
+}
+```
