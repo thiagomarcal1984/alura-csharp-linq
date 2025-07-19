@@ -304,3 +304,57 @@ using (HttpClient client = new())
     personagem.Descrever();
 }
 ```
+# Linq
+## Selecionando gêneros musicais
+Vamos implementar uma classe com um método estático que filtrará todos os tipos de gêneros musicais presentes nas músicas buscadas na API.
+
+Código da classe de filtro:
+```CSharp
+// Filtros\LinqFilter.cs
+using ScreenSound.Modelos;
+
+namespace ScreenSound.Filtros;
+
+internal class LinqFilter
+{
+    public static void FiltrarTodosOsGenerosMusicais(List<Musica> musicas)
+    {
+        var generosMusicais = musicas
+            .Select(generos => generos.Genero)
+            .Distinct()
+            .ToList();
+        generosMusicais.ForEach(genero => Console.WriteLine($"- {genero}"));
+    }
+}
+```
+> Note o encadeamento dos métodos chamados a partir da lista `musicas`:
+> 1. `Select` escolhe qual propriedade será retornada;
+> 2. `Distinct` remove as repetições;
+> 3. `ToList` garante que o retorno será uma lista de objetos da classe `Musica`.
+
+Programa principal:
+```CSharp
+// Program.cs
+using System.Text.Json;
+using ScreenSound.Filtros;
+using ScreenSound.Modelos;
+
+using (HttpClient client = new())
+{
+    try
+    {
+        string resposta = await client.GetStringAsync(
+            "https://guilhermeonrails.github.io/api-csharp-songs/songs.json"
+        );
+        var musicas = JsonSerializer.Deserialize<List<Musica>>(resposta)!;
+        musicas[0].ExibirDetalhesDaMusica();
+
+        // Invocação do método estático do Filtro.
+        LinqFilter.FiltrarTodosOsGenerosMusicais(musicas); 
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Temos um problema: {ex.Message}");
+    }
+}
+```
