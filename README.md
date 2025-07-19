@@ -184,3 +184,55 @@ using (HttpClient client = new())
 > Dois pontos:
 > 1. O desserializador é o método `Deserialize` do objeto `JsonSerializer`, do namespace `System.Text.Json`;
 > 2. Depois da chamada do método, colocamos uma exclamação. Isso serve para informarmos ao compilador que ele não precisa se preocupar se o resultado vai ser nulo, pois o desenvolvedor garante que o código sempre vai retornar alguma coisa. No exemplo, o método retorna um objeto do tipo `List<Musica>?` (que pode ser nulo, repare a interrogação).
+
+## Desafios
+Desafio desenvolvido no projeto `SegundoDesafio`. Os quatro modelos propostos foram implementados, mas documentaremos apenas um dos modelos para exemplo.
+
+Classe de modelo: 
+```CSharp
+// Modelos\Carro.cs
+using System.Text.Json.Serialization;
+
+namespace SegundoDesafio.Modelos;
+
+internal class Carro
+{
+    [JsonPropertyName("marca")]
+    public string? Marca { get; set; }
+    [JsonPropertyName("modelo")]
+    public string? Modelo { get; set; }
+    [JsonPropertyName("ano")]
+    public int Ano { get; set; }
+    [JsonPropertyName("tipo")]
+    public string? Tipo { get; set; }
+    [JsonPropertyName("motor")]
+    public string? Motor { get; set; }
+    [JsonPropertyName("transmissao")]
+    public string? Transmissao { get; set; }
+
+    public override string ToString() => 
+        $"Marca: {Marca}; Modelo: {Modelo}; Ano: {Ano}; Tipo: {Tipo}; Motor: {Motor}; Transmissão: {Transmissao}";
+}
+```
+Programa principal: 
+```CSharp
+// Program.cs
+using System.Text.Json;
+using SegundoDesafio.Modelos;
+
+using (HttpClient client = new())
+{
+    try
+    {
+        // Resto do código
+        resposta = await client.GetStringAsync("https://raw.githubusercontent.com/ArthurOcFernandes/Exerc-cios-C-/curso-4-aula-2/Jsons/Carros.json");
+        var carros = JsonSerializer.Deserialize<List<Carro>>(resposta)!;
+        Console.WriteLine(carros[1]);
+        // Resto do código
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine(e);
+    }
+}
+```
