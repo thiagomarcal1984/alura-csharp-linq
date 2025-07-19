@@ -127,3 +127,34 @@ catch (NullReferenceException ex)
     Console.WriteLine($"Exceção: {ex.Message}");
 }
 ```
+# Linq e ordenação
+## Modelo de música
+Vamos criar uma classe de modelo. Esse modelo conterá anotações que associam os campos do Json às propriedades de classe de modelo.
+
+```CSharp
+// Modelos\Musica.cs
+using System.Text.Json.Serialization;
+
+namespace ScreenSound.Modelos;
+
+internal class Musica
+{
+    [JsonPropertyName("song")]
+    public string? Nome { get; set; }
+    [JsonPropertyName("artist")]
+    public string? Artista { get; set; }
+    [JsonPropertyName("duration_ms")]
+    public int Duracao { get; set; }
+    [JsonPropertyName("genre")]
+    public string? Genero { get; set; }
+
+    public void ExibirDetalhesDaMusica()
+    {
+        Console.WriteLine($"Artista: {Artista}");
+        Console.WriteLine($"Música: {Nome}");
+        Console.WriteLine($"Duração em segundos: {Duracao / 1000}");
+        Console.WriteLine($"Gênero musical: {Genero}");
+    }
+}
+```
+> Note a anotação `[JsonPropertyName("nome_no_json")]`. A anotação vem do namespace `System.Text.Json.Serialization`.
