@@ -158,3 +158,29 @@ internal class Musica
 }
 ```
 > Note a anotação `[JsonPropertyName("nome_no_json")]`. A anotação vem do namespace `System.Text.Json.Serialization`.
+
+## Deserializando os dados
+Vamos usar o desserializador no programa principal.
+> **Desserializar** significa converter um Json em um objeto nativo da linguagem usada. No caso, vamos converter o Json para objetos do C#.
+
+```CSharp
+// Program.cs
+using System.Text.Json;
+using ScreenSound.Modelos;
+
+using (HttpClient client = new())
+{
+    try
+    {
+        string resposta = await client.GetStringAsync(
+            "https://guilhermeonrails.github.io/api-csharp-songs/songs.json"
+        );
+        var musicas = JsonSerializer.Deserialize<List<Musica>>(resposta)!;
+        musicas[0].ExibirDetalhesDaMusica();
+    }
+    // Resto do código.
+}
+```
+> Dois pontos:
+> 1. O desserializador é o método `Deserialize` do objeto `JsonSerializer`, do namespace `System.Text.Json`;
+> 2. Depois da chamada do método, colocamos uma exclamação. Isso serve para informarmos ao compilador que ele não precisa se preocupar se o resultado vai ser nulo, pois o desenvolvedor garante que o código sempre vai retornar alguma coisa. No exemplo, o método retorna um objeto do tipo `List<Musica>?` (que pode ser nulo, repare a interrogação).
