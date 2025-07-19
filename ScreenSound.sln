@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScreenSound", "ScreenSound\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SegundoDesafio", "SegundoDesafio\SegundoDesafio.csproj", "{F78775BF-BD53-4E1E-97F0-F29DE2F2AF3F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GOT", "GOT\GOT.csproj", "{15419D12-D137-4E36-AC3F-6A23FFE1AB70}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,18 @@ Global
 		{F78775BF-BD53-4E1E-97F0-F29DE2F2AF3F}.Release|x64.Build.0 = Release|Any CPU
 		{F78775BF-BD53-4E1E-97F0-F29DE2F2AF3F}.Release|x86.ActiveCfg = Release|Any CPU
 		{F78775BF-BD53-4E1E-97F0-F29DE2F2AF3F}.Release|x86.Build.0 = Release|Any CPU
+		{15419D12-D137-4E36-AC3F-6A23FFE1AB70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15419D12-D137-4E36-AC3F-6A23FFE1AB70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15419D12-D137-4E36-AC3F-6A23FFE1AB70}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{15419D12-D137-4E36-AC3F-6A23FFE1AB70}.Debug|x64.Build.0 = Debug|Any CPU
+		{15419D12-D137-4E36-AC3F-6A23FFE1AB70}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{15419D12-D137-4E36-AC3F-6A23FFE1AB70}.Debug|x86.Build.0 = Debug|Any CPU
+		{15419D12-D137-4E36-AC3F-6A23FFE1AB70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15419D12-D137-4E36-AC3F-6A23FFE1AB70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15419D12-D137-4E36-AC3F-6A23FFE1AB70}.Release|x64.ActiveCfg = Release|Any CPU
+		{15419D12-D137-4E36-AC3F-6A23FFE1AB70}.Release|x64.Build.0 = Release|Any CPU
+		{15419D12-D137-4E36-AC3F-6A23FFE1AB70}.Release|x86.ActiveCfg = Release|Any CPU
+		{15419D12-D137-4E36-AC3F-6A23FFE1AB70}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

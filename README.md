@@ -236,3 +236,71 @@ using (HttpClient client = new())
     }
 }
 ```
+## Faça como eu fiz: refatorando uma função
+Criando o projeto e inserindo-a na solução:
+
+```bash
+dotnet new console -n GOT
+dotnet solution add GOT
+```
+Semelhante ao desafio anterior, mas a classe `Personagem` vai conter uma lista de apelidos do personagem.
+
+Classe de modelo:
+```CSharp
+// GOT\Personagem.cs
+using System.Text.Json.Serialization;
+
+namespace GOT.Modelos;
+
+internal class Personagem
+{
+    [JsonPropertyName("name")]
+    public string? Nome { get; set; }
+    [JsonPropertyName("gender")]
+    public string? Genero { get; set; }
+    [JsonPropertyName("culture")]
+    public string? Cultura { get; set; }
+
+    [JsonPropertyName("books")]
+    public List<string?> Livros { get; set; } = new();
+    [JsonPropertyName("aliases")]
+    public List<string?> Apelidos { get; set; } = new();
+
+    public void Descrever()
+    {
+        Console.WriteLine($"Nome: {Nome}");
+        Console.WriteLine($"Gênero: {Genero}");
+        Console.WriteLine($"Cultura: {Cultura}");
+        
+        Console.WriteLine("Livros:");
+        Livros.ForEach(l => Console.WriteLine("\t" + l));
+        
+        Console.WriteLine("Apelidos:");
+        Apelidos.ForEach(a => Console.WriteLine("\t" + a));
+        
+        Console.WriteLine("-*-*-*-*-*-*-*-*-*-*-*-*-*\n");
+    }
+}
+```
+Programa principal:
+```CSharp
+// Program.cs
+using GOT.Modelos;
+using System.Text.Json;
+
+using (HttpClient client = new())
+{
+    // Obtendo uma lista
+    string resposta = await client.GetStringAsync("https://anapioficeandfire.com/api/characters");
+    var lista = JsonSerializer.Deserialize<List<Personagem>>(resposta)!;
+
+    lista.ForEach(obj => obj.Descrever());
+
+    // Obtendo um único personagem
+    int numPersonagem = 16;
+    resposta = await client.GetStringAsync($"https://anapioficeandfire.com/api/characters/{numPersonagem}");
+    var personagem = JsonSerializer.Deserialize<Personagem>(resposta)!;
+    Console.WriteLine($"Personagem {numPersonagem}: {personagem.Nome}");
+    personagem.Descrever();
+}
+```
