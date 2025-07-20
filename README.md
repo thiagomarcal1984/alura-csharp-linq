@@ -882,3 +882,47 @@ class Program
     }
 }
 ```
+# Desafio 
+## Apresentação do desafio #1
+O Json possui uma propriedade `key`, que corresponde ao tom da música (C, C#, D, D# etc.). Ela é do tipo numérico.
+
+O desafio é implementar o retorno do tom da música a partir da propriedade inteira `key`.
+
+## Resolvendo o desafio #1
+```CSharp
+// Modelos\Musica.cs
+using System.Text.Json.Serialization;
+
+namespace ScreenSound.Modelos;
+
+internal class Musica
+{
+    // Resto do código
+    public string? AnoString { get; set; }
+    [JsonPropertyName("key")]
+    public int Key { get; set; }
+
+    public string Tonalidade 
+    { 
+        get
+        {
+            string[] tonalidade = {
+                "C", "C#", "D", "Eb", "E", "F", 
+                "F#", "G", "Ab", "A", "Bb", "B"
+            };
+            return tonalidade[Key];
+        }
+    }
+
+    // Resto do código
+    public void ExibirDetalhesDaMusica()
+    {
+        Console.WriteLine($"Artista: {Artista}");
+        Console.WriteLine($"Música: {Nome}");
+        Console.WriteLine($"Duração em segundos: {Duracao / 1000}");
+        Console.WriteLine($"Gênero musical: {Genero}");
+        Console.WriteLine($"Key: {Key}");
+        Console.WriteLine($"Tonalidade: {Tonalidade}");
+    }
+}
+```
