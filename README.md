@@ -676,3 +676,66 @@ using (HttpClient client = new())
     // Resto do código
 }
 ```
+## Criando arquivos com C#
+Implementação do código para gerar o Json:
+```CSharp
+// Modelos\MusicasPreferidas.cs
+using System.Text.Json;
+
+namespace ScreenSound.Modelos;
+
+internal class MusicasPreferidas
+{
+    // Resto do código
+
+    public void GerarArquivoJson()
+    {
+        string json = JsonSerializer.Serialize(new {
+            nome = Nome,
+            musicas= ListaDeMusicasFavoritas
+        });
+        string nomeDoArquivo = $"musicas-favoritas-{Nome}.json";
+
+        File.WriteAllText(nomeDoArquivo, json);
+        Console.WriteLine("O arquivo Json foi criado com sucesso.");
+    }
+}
+```
+
+> Observações: 
+> 1. Objetos anônimos no C# (exemplificado no parâmetro do método `JsonSerializer.Serialize`) são criados como se fossem dicionários no Python, precedidos de  `new()`:
+> ```CSharp
+> var obj = new { prop1 = "Propriedade1", prop2 = 2, prop3 = true};
+> ```
+> 2. O arquivo é gerado pelo código `File.WriteAllText` na raiz da solução (junto do arquivo `.sln`).
+
+Uso da classe no programa principal:
+```CSharp
+// Program.cs
+using System.Text.Json;
+using ScreenSound.Filtros;
+using ScreenSound.Modelos;
+
+using (HttpClient client = new())
+{
+    try
+    {
+        string resposta = await client.GetStringAsync(
+            "https://guilhermeonrails.github.io/api-csharp-songs/songs.json"
+        );
+        var musicas = JsonSerializer.Deserialize<List<Musica>>(resposta)!;
+        // Resto do código
+
+        var musicasPreferidasEmilly = new MusicasPreferidas("Emilly");
+        musicasPreferidasEmilly.AdicionarMusicasFavoritas(musicas[500]);
+        // Resto do código
+        
+        musicasPreferidasEmilly.ExibirMusicasFavoritas();
+        musicasPreferidasEmilly.GerarArquivoJson();
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Temos um problema: {ex.Message}");
+    }
+}
+```
