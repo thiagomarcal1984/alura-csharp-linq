@@ -413,3 +413,30 @@ internal class LinqFilter
 }
 ```
 > A única diferença é o operador de exclamação em `musica.Genero!.Contains`. Ela é só um meio de forçar o compilador a não dar warning, porque o desenvolvedor garante que a propriedade `Genero` nunca será nula.
+
+## Exibindo músicas por artistas
+A classe `LinqFilter` foi modificada para acrescentar outro filtro:
+
+```CSharp
+// Filtros\LinqFilter.cs
+using ScreenSound.Modelos;
+
+namespace ScreenSound.Filtros;
+
+internal class LinqFilter
+{
+    // Resto do código
+
+    public static void FiltrarMusicasPorArtista(
+        List<Musica> musicas,
+        string artista
+    )
+    {
+        var musicasDoArtista = musicas
+            .Where(musica => musica.Artista!.Equals(artista))
+            .ToList();
+        musicasDoArtista.ForEach(musica => Console.WriteLine($"- {musica.Nome}"));
+    }
+}
+```
+> A única diferença é o operador de exclamação em `musica.Artista!.Equals`. Ela é só um meio de forçar o compilador a não dar warning, porque o desenvolvedor garante que a propriedade `Artista` nunca será nula.
