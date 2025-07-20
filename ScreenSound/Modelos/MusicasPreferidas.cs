@@ -22,5 +22,6 @@ internal class MusicasPreferidas
         ListaDeMusicasFavoritas.ForEach(musica => {
             Console.WriteLine($"- {musica.Nome} de {musica.Artista}");
         });
+        Console.WriteLine();
     }
 }
