@@ -556,3 +556,51 @@ numeros
     .ToList().ForEach(n => Console.WriteLine($"    {n}"));
 
 ```
+## Faça como eu fiz: mais uma classe
+Que tal filtrar as músicas por ano?
+
+Classe de Modelo:
+```CSharp
+// Modelos\Musica.cs
+using System.Text.Json.Serialization;
+
+namespace ScreenSound.Modelos;
+
+internal class Musica
+{
+    // Resto do código
+    [JsonPropertyName("year")]
+    public string? AnoString { get; set; }
+
+    public int Ano { 
+        get {
+            return int.Parse(AnoString!);
+        }
+    }
+    // Resto do código
+}
+```
+> Note que a propriedade `AnoString` é a que vem da API, mas o retorno inteiro dentro da classe vem da propriedade somente leitura `Ano`.
+
+Classe de Filtro:
+```CSharp
+// Filtros\
+using ScreenSound.Modelos;
+
+namespace ScreenSound.Filtros;
+
+internal class LinqFilter
+{
+    // Resto do código
+    public static void FiltrarMusicasPeloAno(
+        List<Musica> musicas,
+        int ano
+    )
+    {
+        var musicasPorAno = musicas
+            .Where(musica => musica.Ano == ano)
+            .ToList();
+        musicasPorAno.ForEach(musica => Console.WriteLine($"- {musica.Nome}"));
+    }
+}
+```

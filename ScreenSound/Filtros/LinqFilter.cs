@@ -36,4 +36,15 @@ internal class LinqFilter
             .ToList();
         musicasDoArtista.ForEach(musica => Console.WriteLine($"- {musica.Nome}"));
     }
+
+    public static void FiltrarMusicasPeloAno(
+        List<Musica> musicas,
+        int ano
+    )
+    {
+        var musicasPorAno = musicas
+            .Where(musica => musica.Ano == ano)
+            .ToList();
+        musicasPorAno.ForEach(musica => Console.WriteLine($"- {musica.Nome}"));
+    }
 }
