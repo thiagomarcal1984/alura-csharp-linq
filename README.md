@@ -385,3 +385,31 @@ internal class LinqOrder
 2. `Select` escolhe que elemento será selecionado para o retorno;
 3. `Distinct` retorna elementos não repetidos;
 4. `ToList` retorna a lista dos objetos selecionados pelo método `Select`.
+
+## Artistas por gênero musical
+A classe `LinqFilter` foi modificada para acrescentar outro filtro:
+
+```CSharp
+// Filtros\LinqFilter.cs
+using ScreenSound.Modelos;
+
+namespace ScreenSound.Filtros;
+
+internal class LinqFilter
+{
+    // Resto do código
+    public static void FiltrarArtistasPorGeneroMusical(
+        List<Musica> musicas,
+        string genero
+    )
+    {
+        var artistasPorGeneroMusical = musicas
+            .Where(musica => musica.Genero!.Contains(genero))
+            .Select(musica => musica.Artista)
+            .Distinct()
+            .ToList();
+        artistasPorGeneroMusical.ForEach(artista => Console.WriteLine($"- {artista}"));
+    }
+}
+```
+> A única diferença é o operador de exclamação em `musica.Genero!.Contains`. Ela é só um meio de forçar o compilador a não dar warning, porque o desenvolvedor garante que a propriedade `Genero` nunca será nula.
