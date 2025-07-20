@@ -707,7 +707,7 @@ internal class MusicasPreferidas
 > ```CSharp
 > var obj = new { prop1 = "Propriedade1", prop2 = 2, prop3 = true};
 > ```
-> 2. O arquivo é gerado pelo código `File.WriteAllText` na raiz da solução (junto do arquivo `.sln`).
+> 2. Se você estiver rodando a aplicação a partir da CLI com `dotnet run`, o arquivo Json é gerado pelo código `File.WriteAllText` na raiz da solução (junto do arquivo `.sln`). Mas se você rodar a aplicação a partir do Visual Studio, o arquivo Json é gerado no caminho relativo `.\bin\Debug\net{versão do dotnet}\`.
 
 Uso da classe no programa principal:
 ```CSharp
@@ -739,3 +739,7 @@ using (HttpClient client = new())
     }
 }
 ```
+## Utilizando o json
+A equipe do curso disponibilizou este link para testar  o Json gerado a partir do código desenvolvido: https://screen-sound.vercel.app/
+
+Reforçando: Se você estiver rodando a aplicação a partir da CLI com `dotnet run`, o arquivo Json é gerado pelo código `File.WriteAllText` na raiz da solução (junto do arquivo `.sln`). Mas se você rodar a aplicação a partir do Visual Studio, o arquivo Json é gerado no caminho relativo `.\bin\Debug\net{versão do dotnet}\`.
