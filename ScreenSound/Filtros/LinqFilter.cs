@@ -47,4 +47,15 @@ internal class LinqFilter
             .ToList();
         musicasPorAno.ForEach(musica => Console.WriteLine($"- {musica.Nome}"));
     }
+
+    public static void FiltrarMusicasEmCSharp(List<Musica> musicas)
+    {
+        var musicasEmCSharp = musicas
+            // .Where(m => m.Key == 1)
+            .Where(m => m.Tonalidade == "C#")
+            .Select(m => m.Nome)
+            .ToList();
+        Console.WriteLine("Músicas em C#:");
+        musicasEmCSharp.ForEach(m => Console.WriteLine($"- {m}"));
+    }
 }

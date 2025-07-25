@@ -10,7 +10,7 @@ using (HttpClient client = new())
             "https://guilhermeonrails.github.io/api-csharp-songs/songs.json"
         );
         var musicas = JsonSerializer.Deserialize<List<Musica>>(resposta)!;
-        musicas[0].ExibirDetalhesDaMusica();
+        // musicas[0].ExibirDetalhesDaMusica();
 
         // LinqFilter.FiltrarTodosOsGenerosMusicais(musicas);
 
@@ -29,6 +29,8 @@ using (HttpClient client = new())
         
         // musicasPreferidasEmilly.ExibirMusicasFavoritas();
         // musicasPreferidasEmilly.GerarArquivoJson();
+
+        LinqFilter.FiltrarMusicasEmCSharp(musicas);
     }
     catch (Exception ex)
     {

@@ -926,3 +926,30 @@ internal class Musica
     }
 }
 ```
+## Apresentação do desafio #2
+O desafio é: filtre todas as músicas cuja tonalidade é C#!
+
+## Resolvendo o desafio #2
+Implementação do filtro em `LinqFilter`:
+
+```CSharp
+// Filtros\LinqFilter.cs
+using ScreenSound.Modelos;
+
+namespace ScreenSound.Filtros;
+
+internal class LinqFilter
+{
+    // Resto do código
+    public static void FiltrarMusicasEmCSharp(List<Musica> musicas)
+    {
+        var musicasEmCSharp = musicas
+            // .Where(m => m.Key == 1)
+            .Where(m => m.Tonalidade == "C#")
+            .Select(m => m.Nome)
+            .ToList();
+        Console.WriteLine("Músicas em C#:");
+        musicasEmCSharp.ForEach(m => Console.WriteLine($"- {m}"));
+    }
+}
+```
